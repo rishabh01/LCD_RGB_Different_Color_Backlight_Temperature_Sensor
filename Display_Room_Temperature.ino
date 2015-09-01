@@ -1,13 +1,13 @@
-
 //Check and display temperature 
 #include <Wire.h>
 #include "rgb_lcd.h"
 const int pinTemp = A0;    
 rgb_lcd lcd;
 
-const int colorR = 255;
-const int colorG = 255;
-const int colorB = 0;
+// Assigning initial color that'll be seen once the Galileo boots
+int colorR = 255;
+int colorG = 255;
+int colorB = 0;
 const int b=3975; 
 float resistance;
 float temperature;
@@ -33,15 +33,21 @@ void loop()
    
     if (temperature < 25)
     {    
-      
-      //display temperature
+	  colorR = 0;
+	  colorG = 0;
+	  colorB = 255;
+	  lcd.setRGB(colorR, colorG, colorB);
+      //display temperature and 
       lcd.print("It's cool at: ");
       lcd.print(temperature);
     }
     
     else
     {
-      
+      colorR = 255;
+	  colorG = 0;
+	  colorB = 0;
+	  lcd.setRGB(colorR, colorG, colorB);
       //display temperature
       lcd.print("It's warm at: ");
       lcd.print(temperature);
